@@ -44,8 +44,10 @@
 			height: this.height
 		});
 
-		this.firstDom = this.container.find('li').first();
-		this.lastDom = this.container.find('li').last();
+		this.liArr = this.container.find('li');
+
+		this.firstDom = this.liArr.first();
+		this.lastDom = this.liArr.last();
 
 
 	
@@ -57,10 +59,11 @@
 
 	carousel.prototype.setStyle = function() {
 		var conW = this.width;
-		var imgW = $('li')[0].clientWidth;
+		var liArr = this.liArr;
+		var imgW = liArr[0].clientWidth;
 		var marL = (conW - imgW) / 2;
 
-		var liArr = $('li');
+		
 
 
 		if (liArr.length >= 3) {
@@ -68,13 +71,13 @@
 
 			for (var i = 0; i < liArr.length; i++) {
 				if (i < middleNum) {
-					$('li').eq(i).css({
+					liArr.eq(i).css({
 						left: (marL / (middleNum - 1)) * i,
 						zIndex: i,
 						top: 10 * (middleNum - 1 - i)
 					});
 				} else {
-					$('li').eq(i).css({
+					liArr.eq(i).css({
 						right: (marL / (middleNum - 1)) * (liArr.length - 1 - i),
 						zIndex: liArr.length - 1 - i,
 						top: 10 * (i - middleNum + 1)
@@ -116,7 +119,7 @@
 	carousel.prototype.preFn = function() {
 		var ts = this;
 
-		var liItems = $('li');
+		var liItems = this.liArr;
 		liItems.each(function(){
 
 			var self = $(this);
@@ -147,7 +150,7 @@
 
 		var ts = this;
 
-		var liItems = $('li');
+		var liItems = this.liArr;
 		liItems.each(function(){
 
 			var self = $(this);
@@ -176,7 +179,7 @@
 
 	carousel.prototype.autoPlay = function() {
 		var ts = this;
-		var liItems = $('li');
+		var liItems = this.liArr;
 		this.timer = setInterval(function(){
 			liItems.each(function(){
 
